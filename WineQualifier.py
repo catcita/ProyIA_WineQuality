@@ -26,8 +26,8 @@ print(dataframe['quality_label'].value_counts())
 print(f"Porcentaje clase 1: {dataframe['quality_label'].mean() * 100:.2f}%")
 
 # 4. PREPARACIÓN DE DATOS
-X = dataframe.drop(['quality', 'quality_label'], axis=1)
-y = dataframe['quality_label']
+X = dataframe.drop(['quality', 'quality_label'], axis=1) # Características de los vinos - calidad
+y = dataframe['quality_label'] # Variable objetivo - calidad
 
 # Split train/test
 X_train, X_test, y_train, y_test = train_test_split(
@@ -40,10 +40,10 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
 # 5. MODELO BASELINE (sin optimización)
-rf_baseline = RandomForestClassifier(random_state=42, n_jobs=-1)
-rf_baseline.fit(X_train_scaled, y_train)
+randomforest_baseline = RandomForestClassifier(random_state=42, n_jobs=-1)
+randomforest_baseline.fit(X_train_scaled, y_train)
 
-y_pred_baseline = rf_baseline.predict(X_test_scaled)
+y_pred_baseline = randomforest_baseline.predict(X_test_scaled)
 print(f"\n=== BASELINE RANDOM FOREST ===")
 print(f"Accuracy: {accuracy_score(y_test, y_pred_baseline):.4f}")
 print(f"\n{classification_report(y_test, y_pred_baseline)}")
@@ -57,9 +57,9 @@ param_grid = {
     'max_features': ['sqrt', 'log2']
 }
 
-rf = RandomForestClassifier(random_state=42, n_jobs=-1)
+randomforest = RandomForestClassifier(random_state=42, n_jobs=-1)
 grid_search = GridSearchCV(
-    rf, param_grid, cv=5, scoring='accuracy',
+    randomforest, param_grid, cv=5, scoring='accuracy',
     n_jobs=-1, verbose=1
 )
 grid_search.fit(X_train_scaled, y_train)
