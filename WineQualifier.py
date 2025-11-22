@@ -10,7 +10,9 @@ from sklearn.metrics import (classification_report, confusion_matrix,
                              accuracy_score, roc_auc_score, roc_curve)
 
 # 1. CARGA DE DATOS
-url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv"
+url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv" #Este dataset les proporciona
+                                        # las características (X) (la acidez, el alcohol, etc.) y la variable
+                                        # objetivo (Y) (la calidad del vino), que es el pilar para el aprendizaje supervisado.
 dataframe = pd.read_csv(url, sep=';')
 
 # 2. EXPLORACIÓN INICIAL
