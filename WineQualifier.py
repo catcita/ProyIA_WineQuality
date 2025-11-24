@@ -10,19 +10,19 @@ from sklearn.metrics import (classification_report, confusion_matrix,
                              accuracy_score, roc_auc_score, roc_curve)
 
 # 1. CARGA DE DATOS
-url = "https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-white.csv" #Este dataset les proporciona
-                                        # las características (X) (la acidez, el alcohol, etc.) y la variable
-                                        # objetivo (Y) (la calidad del vino), que es el pilar para el aprendizaje supervisado.
-dataframe = pd.read_csv(url, sep=';')
+#Este dataset les proporciona las características (X) (la acidez, el alcohol, etc.) y la variable
+# objetivo (Y) (la calidad del vino), que es el pilar para el aprendizaje supervisado.
+dataframe = pd.read_csv('winequality-white.csv', sep=';')
 
 # 2. EXPLORACIÓN INICIAL
-print(dataframe.head())
-print(dataframe.info())
+print(dataframe.head()) # se imprimen las primeras 5 filas del dataframe
+print(dataframe.info()) # se imprimen los tipos de datos de cada columna y si hay nulos
 print(dataframe.describe())
-print(dataframe['quality'].value_counts().sort_index())
+print(dataframe['quality'].value_counts().sort_index()) #Cuenta cuántos vinos hay para
+                                                        # cada puntaje de calidad (de 3 a 9).
 
 # 3. CONVERSIÓN A CLASIFICACIÓN BINARIA
-dataframe['quality_label'] = (dataframe['quality'] > 6).astype(int)
+dataframe['quality_label'] = (dataframe['quality'] > 6).astype(int) # crea una nueva columna 'quality_label'
 print(f"\nDistribución de clases:")
 print(dataframe['quality_label'].value_counts())
 print(f"Porcentaje clase 1: {dataframe['quality_label'].mean() * 100:.2f}%")
